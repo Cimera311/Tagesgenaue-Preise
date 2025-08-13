@@ -4,9 +4,8 @@ Daily crypto price appender (EUR) aligned to Europe/Berlin local date,
 with duplicate-date guard (idempotent).
 
 Primary: CoinGecko simple/price
-Fallback: Coinpaprika /tickers/{id}
-
-Coins: BTC, GoMining Token (edit COINS to add more)
+Fallback 1: CoinPaprika /tickers/{id}?quotes=EUR
+Fallback 2: CoinPaprika USD * FX(USD->EUR) via exchangerate.host (free)
 """
 import os, sys, csv, json, datetime, urllib.request
 from zoneinfo import ZoneInfo
@@ -29,12 +28,15 @@ def coingecko_simple_price(ids):
     url = f"https://api.coingecko.com/api/v3/simple/price?ids={','.join(ids)}&vs_currencies={VS_CURRENCY}"
     try:
         txt = http_get(url, headers={"accept": "application/json", "user-agent": "price-automation/1.0"})
-        return json.loads(txt)
+        data = json.loads(txt)
+        # normalize: could be empty {}
+        return data if isinstance(data, dict) and data else None
     except Exception:
         return None
 
-def paprika_ticker_last(coin_id):
-    url = f"https://api.coinpaprika.com/v1/tickers/{coin_id}"
+def paprika_ticker_eur(coin_id):
+    """Try getting EUR directly from CoinPaprika using quotes=EUR."""
+    url = f"https://api.coinpaprika.com/v1/tickers/{coin_id}?quotes=EUR"
     try:
         data = json.loads(http_get(url, headers={"accept":"application/json"}))
         q = data.get("quotes", {}).get("EUR")
@@ -44,21 +46,49 @@ def paprika_ticker_last(coin_id):
         pass
     return None
 
+def paprika_ticker_usd(coin_id):
+    url = f"https://api.coinpaprika.com/v1/tickers/{coin_id}?quotes=USD"
+    try:
+        data = json.loads(http_get(url, headers={"accept":"application/json"}))
+        q = data.get("quotes", {}).get("USD")
+        if q and "price" in q:
+            return float(q["price"])
+    except Exception:
+        pass
+    return None
+
+def usd_to_eur_rate():
+    """Free FX rate from exchangerate.host"""
+    url = "https://api.exchangerate.host/latest?base=USD&symbols=EUR"
+    try:
+        data = json.loads(http_get(url, headers={"accept":"application/json"}))
+        return float(data["rates"]["EUR"])
+    except Exception:
+        return None
+
+def paprika_price_eur_with_fallback(coin_id):
+    # Try EUR directly
+    eur = paprika_ticker_eur(coin_id)
+    if eur is not None:
+        return eur
+    # Then USD * FX
+    usd = paprika_ticker_usd(coin_id)
+    if usd is not None:
+        fx = usd_to_eur_rate()
+        if fx is not None:
+            return usd * fx
+    return None
+
 def append_csv_idempotent(path, row_date_iso, symbol, price):
     # ensure header and skip if date already exists
-    rows = []
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                rows.append(line.rstrip("\n"))
-        # check last or any line with same date
-        for line in rows[1:]:  # skip header
-            if not line.strip():
-                continue
-            d = line.split(",")[0]
-            if d == row_date_iso:
-                print(f"Skip {symbol}: date {row_date_iso} already in {os.path.basename(path)}")
-                return
+            for i, line in enumerate(f):
+                if i == 0:
+                    continue
+                if line.split(",",1)[0] == row_date_iso:
+                    print(f"Skip {symbol}: date {row_date_iso} already in {os.path.basename(path)}")
+                    return
     exists = os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -80,7 +110,7 @@ def main():
             except Exception:
                 price = None
         if price is None:
-            price = paprika_ticker_last(c["paprika_id"])
+            price = paprika_price_eur_with_fallback(c["paprika_id"])
         if price is None:
             print(f"ERROR: Failed to fetch price for {c['id']}", file=sys.stderr)
             continue
