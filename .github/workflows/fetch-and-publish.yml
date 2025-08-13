@@ -1,0 +1,44 @@
+name: Fetch prices & publish to Pages
+
+on:
+  workflow_dispatch: # manueller Start möglich
+  schedule:
+    # 23:05 UTC ≈ 00:05 MEZ (Winter) bzw. 01:05 MESZ (Sommer)
+    - cron: "5 23 * * *"
+
+jobs:
+  fetch-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # erlaubt Commit/Push zurück ins Repo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # falls du requirements.txt hast – sonst bleibt der Schritt einfach leer
+          pip install -r requirements.txt || true
+
+      - name: Run fetcher
+        run: |
+          python fetch_prices.py
+
+      - name: Mirror CSVs to docs/data
+        run: |
+          mkdir -p docs/data
+          cp -f data/*.csv docs/data/ || true
+
+      - name: Commit & push updated CSVs + docs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.csv docs/data/*.csv
+          git commit -m "chore: update CSVs ($(date -u +'%Y-%m-%dT%H:%M:%SZ'))" || echo "No changes"
+          git push
