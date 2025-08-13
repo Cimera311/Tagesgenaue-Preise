@@ -86,12 +86,12 @@ def append_csv_idempotent(path, row_date_iso, symbol, price):
             for i, line in enumerate(f):
                 if i == 0:
                     continue
-                if line.split(",",1)[0] == row_date_iso:
+                if line.split(";", 1)[0] == row_date_iso:  # hier auch ; anpassen
                     print(f"Skip {symbol}: date {row_date_iso} already in {os.path.basename(path)}")
                     return
     exists = os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, delimiter=";")  # <--- Trenner geändert
         if not exists:
             w.writerow(["date_iso", "symbol", "price_eur"])
         w.writerow([row_date_iso, symbol, f"{price:.8f}"])
