@@ -112,8 +112,12 @@ def append_csv_idempotent(path, row_date_iso, row_time_berlin, symbol, price_eur
     clean_date = str(row_date_iso).strip()
     clean_time = str(row_time_berlin).strip()
     clean_symbol = str(symbol).strip()
-    eur_str = f"{price_eur:.8f}".strip() if price_eur is not None else ""
-    usd_str = f"{price_usd:.8f}".strip() if price_usd is not None else ""
+        # ...existing code...
+    eur_str = f"{price_eur:.8f}".replace(".", ",").strip() if price_eur is not None else ""
+    usd_str = f"{price_usd:.8f}".replace(".", ",").strip() if price_usd is not None else ""
+    # ...existing code...
+    #eur_str = f"{price_eur:.8f}".strip() if price_eur is not None else ""
+    #usd_str = f"{price_usd:.8f}".strip() if price_usd is not None else ""
 
     with open(path, "a", newline="", encoding="utf-8") as f:
         w = csv.writer(f, delimiter=";")
