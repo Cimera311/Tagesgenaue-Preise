@@ -36,6 +36,17 @@
             }
             document.getElementById('result').innerHTML = 'Kein Preis gefunden';
         }
+
+        // URL-Parameter auslesen
+        const urlParams = new URLSearchParams(window.location.search);
+        const presetDate = urlParams.get('date');
+        const presetCurrency = urlParams.get('currency');
+        
+        window.onload = function() {
+            if (presetDate) document.getElementById('date').value = presetDate;
+            if (presetCurrency) document.getElementById('currency').value = presetCurrency;
+            if (presetDate && presetCurrency) getPrice(); // Automatisch abrufen
+        };
     </script>
 </body>
 </html>
