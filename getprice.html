@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Krypto Preis Abfrage</title>
+</head>
+<body>
+    <h1>Tagesgenaue Krypto-Preise</h1>
+    <input type="date" id="date" value="2024-01-15">
+    <select id="currency">
+        <option value="BTC">Bitcoin</option>
+        <option value="GOMINING">GoMining</option>
+    </select>
+    <button onclick="getPrice()">Preis abrufen</button>
+    <div id="result"></div>
+
+    <script>
+        async function getPrice() {
+            const date = document.getElementById('date').value;
+            const currency = document.getElementById('currency').value;
+            const file = currency === 'BTC' ? 'bitcoin_eur.csv' : 'gominingtoken_eur.csv';
+            
+            const response = await fetch(`data/${file}`);
+            const text = await response.text();
+            const lines = text.split('\n');
+            
+            for (let line of lines) {
+                if (line.startsWith(date)) {
+                    const parts = line.split(';');
+                    document.getElementById('result').innerHTML = `
+                        <h3>${currency} am ${date}</h3>
+                        <p>EUR: ${parts[3]}</p>
+                        <p>USD: ${parts[4]}</p>
+                    `;
+                    return;
+                }
+            }
+            document.getElementById('result').innerHTML = 'Kein Preis gefunden';
+        }
+    </script>
+</body>
+</html>
