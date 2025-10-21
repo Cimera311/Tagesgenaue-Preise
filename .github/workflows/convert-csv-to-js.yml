@@ -1,0 +1,35 @@
+name: Convert CSV to JS
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Täglich um 02:00 Uhr (nach CSV-Update)
+  workflow_dispatch:  # Manuelles Auslösen möglich
+  push:
+    paths:
+      - 'data/bitcoin_eur.csv'
+      - 'data/gominingtoken_eur.csv'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Run Conversion Script
+        run: node convert-csv-to-js.js
+        
+      - name: Commit Generated Files
+        run: |
+          git config user.name "CSV-to-JS Bot"
+          git config user.email "bot@github.com"
+          git add src/scripts/price-data-*.js
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-convert: CSV zu JS ($(date +'%Y-%m-%d %H:%M'))"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

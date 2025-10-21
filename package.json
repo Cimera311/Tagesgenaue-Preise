@@ -1,0 +1,10 @@
+{
+  "name": "tagesgenaue-preise",
+  "version": "1.0.0",
+  "description": "Tagesgenaue Krypto-Preise für Steuerzwecke",
+  "scripts": {
+    "convert": "node convert-csv-to-js.js"
+  },
+  "author": "",
+  "license": "MIT"
+}

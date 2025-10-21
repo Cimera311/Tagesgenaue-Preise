@@ -2,7 +2,7 @@ name: Sync Price Data to Other Repos
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Täglich um 3 Uhr nachts (UTC)
+    - cron: '0 4 * * *'  # Täglich um 4 Uhr nachts (UTC) - nach der CSV-zu-JS Konvertierung um 2 Uhr
   workflow_dispatch:  # Ermöglicht manuelles Auslösen
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Target Repository
         uses: actions/checkout@v3
         with:
-          repository: Cimera311/HashSense_2  # ⚠️ Hier dein Ziel-Repository eintragen
+          repository: Cimera311/HashSense_2
           token: ${{ secrets.PAT_TOKEN }}
           path: target-repo
           
@@ -25,11 +25,17 @@ jobs:
           cp data/bitcoin_eur.csv target-repo/data/
           cp data/gominingtoken_eur.csv target-repo/data/
           
+      - name: Copy JS Price Data Files
+        run: |
+          mkdir -p target-repo/src/scripts
+          cp src/scripts/price-data-btc.js target-repo/src/scripts/
+          cp src/scripts/price-data-gmt.js target-repo/src/scripts/
+          
       - name: Commit and Push to Target
         run: |
           cd target-repo
           git config user.name "Price Sync Bot"
           git config user.email "bot@github.com"
-          git add data/*.csv
-          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Preise vom $(date +'%Y-%m-%d %H:%M')"
+          git add data/*.csv src/scripts/price-data-*.js
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Preise (CSV + JS) vom $(date +'%Y-%m-%d %H:%M')"
           git push

@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Krypto Preis Abfrage</title>
+    <script src="src/scripts/price-data-btc.js"></script>
+    <script src="src/scripts/price-data-gmt.js"></script>
 </head>
 <body>
     <h1>Tagesgenaue Krypto-Preise</h1>
@@ -14,27 +16,23 @@
     <div id="result"></div>
 
     <script>
-        async function getPrice() {
+        function getPrice() {
             const date = document.getElementById('date').value;
             const currency = document.getElementById('currency').value;
-            const file = currency === 'BTC' ? 'bitcoin_eur.csv' : 'gominingtoken_eur.csv';
             
-            const response = await fetch(`data/${file}`);
-            const text = await response.text();
-            const lines = text.split('\n');
+            // Daten aus den vorgeladenen JS-Objekten holen
+            const data = currency === 'BTC' ? btcPriceData : gmtPriceData;
             
-            for (let line of lines) {
-                if (line.startsWith(date)) {
-                    const parts = line.split(';');
-                    document.getElementById('result').innerHTML = `
-                        <h3>${currency} am ${date}</h3>
-                        <p>EUR: ${parts[3]}</p>
-                        <p>USD: ${parts[4]}</p>
-                    `;
-                    return;
-                }
+            if (data[date]) {
+                const price = data[date];
+                document.getElementById('result').innerHTML = `
+                    <h3>${currency} am ${date}</h3>
+                    <p>EUR: ${price.price_eur}</p>
+                    <p>USD: ${price.price_usd}</p>
+                `;
+            } else {
+                document.getElementById('result').innerHTML = 'Kein Preis für dieses Datum gefunden';
             }
-            document.getElementById('result').innerHTML = 'Kein Preis gefunden';
         }
 
         // URL-Parameter auslesen
@@ -45,7 +43,7 @@
         window.onload = function() {
             if (presetDate) document.getElementById('date').value = presetDate;
             if (presetCurrency) document.getElementById('currency').value = presetCurrency;
-            if (presetDate && presetCurrency) getPrice(); // Automatisch abrufen
+            if (presetDate && presetCurrency) getPrice();
         };
     </script>
 </body>
