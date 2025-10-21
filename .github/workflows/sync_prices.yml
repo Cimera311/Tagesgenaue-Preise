@@ -1,0 +1,35 @@
+name: Sync Price Data to Other Repos
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Täglich um 3 Uhr nachts (UTC)
+  workflow_dispatch:  # Ermöglicht manuelles Auslösen
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v3
+        
+      - name: Checkout Target Repository
+        uses: actions/checkout@v3
+        with:
+          repository: Cimera311/HashSense_2  # ⚠️ Hier dein Ziel-Repository eintragen
+          token: ${{ secrets.PAT_TOKEN }}
+          path: target-repo
+          
+      - name: Copy CSV Files
+        run: |
+          mkdir -p target-repo/data
+          cp data/bitcoin_eur.csv target-repo/data/
+          cp data/gominingtoken_eur.csv target-repo/data/
+          
+      - name: Commit and Push to Target
+        run: |
+          cd target-repo
+          git config user.name "Price Sync Bot"
+          git config user.email "bot@github.com"
+          git add data/*.csv
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Preise vom $(date +'%Y-%m-%d %H:%M')"
+          git push
