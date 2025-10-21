@@ -27,15 +27,15 @@ jobs:
           
       - name: Copy JS Price Data Files
         run: |
-          mkdir -p target-repo/src/scripts
-          cp src/scripts/price-data-btc.js target-repo/src/scripts/
-          cp src/scripts/price-data-gmt.js target-repo/src/scripts/
+          mkdir -p target-repo/data
+          cp src/scripts/price-data-btc.js target-repo/data
+          cp src/scripts/price-data-gmt.js target-repo/data
           
       - name: Commit and Push to Target
         run: |
           cd target-repo
           git config user.name "Price Sync Bot"
           git config user.email "bot@github.com"
-          git add data/*.csv src/scripts/price-data-*.js
+          git add data/*.csv src/scripts/price-data-*.js data/*.js
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Preise (CSV + JS) vom $(date +'%Y-%m-%d %H:%M')"
           git push
