@@ -14,8 +14,8 @@ import os, sys, csv, json, datetime, urllib.request
 from zoneinfo import ZoneInfo
 
 COINS = [
-    {"id": "bitcoin", "paprika_id": "btc-bitcoin", "symbol": "BTC"},
-    {"id": "gomining-token", "paprika_id": "gmt-gomining-token", "symbol": "GOMINING"},
+    {"id": "bitcoin", "paprika_id": "btc-bitcoin", "symbol": "BTC", "filename": "bitcoin_eur.csv"},
+    {"id": "gmt-token", "paprika_id": "gmt-gomining-token", "symbol": "GOMINING", "filename": "gominingtoken_eur.csv"},
 ]
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -159,7 +159,7 @@ def main():
             print(f"ERROR: Failed to fetch EUR/USD for {c['id']}", file=sys.stderr)
             continue
 
-        out = os.path.join(DATA_DIR, f"{c['id'].replace('-', '')}_eur.csv")
+        out = os.path.join(DATA_DIR, c.get("filename", f"{c['id'].replace('-', '')}_eur.csv"))
         append_csv_idempotent(out, date_berlin, time_berlin, c["symbol"], eur, usd)
 
 
