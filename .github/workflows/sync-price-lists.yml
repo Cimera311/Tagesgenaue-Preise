@@ -1,0 +1,42 @@
+name: Sync Price Lists to Other Repos
+
+on:
+  schedule:
+    - cron: '30 4 * * *'  # Täglich um 04:30 UTC (nach convert um 03:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
+        with:
+          repository: Cimera311/HashSense_2
+          token: ${{ secrets.PAT_TOKEN }}
+          path: target-repo
+
+      - name: Copy Price List CSV Files
+        run: |
+          mkdir -p target-repo/data/price_lists
+          cp data/price_lists/*.csv target-repo/data/price_lists/
+
+      - name: Copy Price List JS Files
+        run: |
+          mkdir -p target-repo/src/scripts
+          cp src/scripts/price-data-*.js target-repo/src/scripts/ || true
+
+      - name: Commit and Push to Target
+        run: |
+          cd target-repo
+          git config user.name "Price Sync Bot"
+          git config user.email "bot@github.com"
+          git add data/price_lists/*.csv src/scripts/price-data-*.js
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Price Lists (CSV + JS) vom $(date +'%Y-%m-%d %H:%M')"
+          git push

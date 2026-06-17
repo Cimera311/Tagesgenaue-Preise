@@ -1,0 +1,37 @@
+name: Convert Price Lists CSV to JS
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Täglich um 03:00 UTC (nach fetch-price-lists um 01:05)
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/price_lists/*.csv'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run Conversion Script
+        run: node convert-price-lists-to-js.js
+
+      - name: Commit Generated Files
+        run: |
+          git config user.name "CSV-to-JS Bot"
+          git config user.email "bot@github.com"
+          git add src/scripts/price-data-*.js
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-convert: Price Lists CSV zu JS ($(date +'%Y-%m-%d %H:%M'))"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
