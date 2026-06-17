@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-05-15T03:02:06.643Z
+// Auto-generiert am 2026-06-17T03:01:22.409Z
 const btcPriceData = {
   "2024-01-01": {
     "date_iso": "2024-01-01",
@@ -6061,6 +6061,237 @@ const btcPriceData = {
     "symbol": "BTC",
     "price_eur": "69678,00000000",
     "price_usd": "81264,00000000"
+  },
+  "2026-05-16": {
+    "date_iso": "2026-05-16",
+    "time_berlin": "01:26",
+    "symbol": "BTC",
+    "price_eur": "68026,00000000",
+    "price_usd": "79064,00000000"
+  },
+  "2026-05-17": {
+    "date_iso": "2026-05-17",
+    "time_berlin": "01:25",
+    "symbol": "BTC",
+    "price_eur": "67248,00000000",
+    "price_usd": "78190,00000000"
+  },
+  "2026-05-18": {
+    "date_iso": "2026-05-18",
+    "time_berlin": "01:26",
+    "symbol": "BTC",
+    "price_eur": "66983,00000000",
+    "price_usd": "77842,00000000"
+  },
+  "2026-05-19": {
+    "date_iso": "2026-05-19",
+    "time_berlin": "01:31",
+    "symbol": "BTC",
+    "price_eur": "66034,00000000",
+    "price_usd": "76985,00000000"
+  },
+  "2026-05-20": {
+    "date_iso": "2026-05-20",
+    "time_berlin": "01:32",
+    "symbol": "BTC",
+    "price_eur": "66173,00000000",
+    "price_usd": "76830,00000000"
+  },
+  "2026-05-21": {
+    "date_iso": "2026-05-21",
+    "time_berlin": "01:37",
+    "symbol": "BTC",
+    "price_eur": "66552,00000000",
+    "price_usd": "77362,00000000"
+  },
+  "2026-05-22": {
+    "date_iso": "2026-05-22",
+    "time_berlin": "01:30",
+    "symbol": "BTC",
+    "price_eur": "66776,00000000",
+    "price_usd": "77569,00000000"
+  },
+  "2026-05-23": {
+    "date_iso": "2026-05-23",
+    "time_berlin": "01:32",
+    "symbol": "BTC",
+    "price_eur": "65142,00000000",
+    "price_usd": "75621,00000000"
+  },
+  "2026-05-24": {
+    "date_iso": "2026-05-24",
+    "time_berlin": "01:27",
+    "symbol": "BTC",
+    "price_eur": "65937,00000000",
+    "price_usd": "76513,00000000"
+  },
+  "2026-05-25": {
+    "date_iso": "2026-05-25",
+    "time_berlin": "01:29",
+    "symbol": "BTC",
+    "price_eur": "65923,00000000",
+    "price_usd": "76769,00000000"
+  },
+  "2026-05-26": {
+    "date_iso": "2026-05-26",
+    "time_berlin": "01:32",
+    "symbol": "BTC",
+    "price_eur": "66329,00000000",
+    "price_usd": "77213,00000000"
+  },
+  "2026-05-27": {
+    "date_iso": "2026-05-27",
+    "time_berlin": "01:32",
+    "symbol": "BTC",
+    "price_eur": "65139,00000000",
+    "price_usd": "75801,00000000"
+  },
+  "2026-05-28": {
+    "date_iso": "2026-05-28",
+    "time_berlin": "01:36",
+    "symbol": "BTC",
+    "price_eur": "63832,00000000",
+    "price_usd": "74188,00000000"
+  },
+  "2026-05-29": {
+    "date_iso": "2026-05-29",
+    "time_berlin": "01:37",
+    "symbol": "BTC",
+    "price_eur": "63138,00000000",
+    "price_usd": "73564,00000000"
+  },
+  "2026-05-30": {
+    "date_iso": "2026-05-30",
+    "time_berlin": "01:37",
+    "symbol": "BTC",
+    "price_eur": "62797,00000000",
+    "price_usd": "73237,00000000"
+  },
+  "2026-05-31": {
+    "date_iso": "2026-05-31",
+    "time_berlin": "01:29",
+    "symbol": "BTC",
+    "price_eur": "63241,00000000",
+    "price_usd": "73760,00000000"
+  },
+  "2026-06-01": {
+    "date_iso": "2026-06-01",
+    "time_berlin": "01:30",
+    "symbol": "BTC",
+    "price_eur": "63250,00000000",
+    "price_usd": "73722,00000000"
+  },
+  "2026-06-02": {
+    "date_iso": "2026-06-02",
+    "time_berlin": "01:39",
+    "symbol": "BTC",
+    "price_eur": "61403,00000000",
+    "price_usd": "71441,00000000"
+  },
+  "2026-06-03": {
+    "date_iso": "2026-06-03",
+    "time_berlin": "01:41",
+    "symbol": "BTC",
+    "price_eur": "57190,00000000",
+    "price_usd": "66458,00000000"
+  },
+  "2026-06-04": {
+    "date_iso": "2026-06-04",
+    "time_berlin": "01:40",
+    "symbol": "BTC",
+    "price_eur": "55338,00000000",
+    "price_usd": "64231,00000000"
+  },
+  "2026-06-05": {
+    "date_iso": "2026-06-05",
+    "time_berlin": "01:34",
+    "symbol": "BTC",
+    "price_eur": "54691,00000000",
+    "price_usd": "63517,00000000"
+  },
+  "2026-06-06": {
+    "date_iso": "2026-06-06",
+    "time_berlin": "01:35",
+    "symbol": "BTC",
+    "price_eur": "52587,00000000",
+    "price_usd": "60596,00000000"
+  },
+  "2026-06-07": {
+    "date_iso": "2026-06-07",
+    "time_berlin": "01:30",
+    "symbol": "BTC",
+    "price_eur": "52636,00000000",
+    "price_usd": "60661,00000000"
+  },
+  "2026-06-08": {
+    "date_iso": "2026-06-08",
+    "time_berlin": "01:31",
+    "symbol": "BTC",
+    "price_eur": "54895,00000000",
+    "price_usd": "63230,00000000"
+  },
+  "2026-06-09": {
+    "date_iso": "2026-06-09",
+    "time_berlin": "01:34",
+    "symbol": "BTC",
+    "price_eur": "54686,00000000",
+    "price_usd": "63058,00000000"
+  },
+  "2026-06-10": {
+    "date_iso": "2026-06-10",
+    "time_berlin": "01:37",
+    "symbol": "BTC",
+    "price_eur": "53374,00000000",
+    "price_usd": "61571,00000000"
+  },
+  "2026-06-11": {
+    "date_iso": "2026-06-11",
+    "time_berlin": "01:39",
+    "symbol": "BTC",
+    "price_eur": "53301,00000000",
+    "price_usd": "61471,00000000"
+  },
+  "2026-06-12": {
+    "date_iso": "2026-06-12",
+    "time_berlin": "01:39",
+    "symbol": "BTC",
+    "price_eur": "54801,00000000",
+    "price_usd": "63438,00000000"
+  },
+  "2026-06-13": {
+    "date_iso": "2026-06-13",
+    "time_berlin": "01:38",
+    "symbol": "BTC",
+    "price_eur": "54804,00000000",
+    "price_usd": "63427,00000000"
+  },
+  "2026-06-14": {
+    "date_iso": "2026-06-14",
+    "time_berlin": "01:32",
+    "symbol": "BTC",
+    "price_eur": "55683,00000000",
+    "price_usd": "64423,00000000"
+  },
+  "2026-06-15": {
+    "date_iso": "2026-06-15",
+    "time_berlin": "01:35",
+    "symbol": "BTC",
+    "price_eur": "56530,00000000",
+    "price_usd": "65599,00000000"
+  },
+  "2026-06-16": {
+    "date_iso": "2026-06-16",
+    "time_berlin": "01:41",
+    "symbol": "BTC",
+    "price_eur": "57082,00000000",
+    "price_usd": "66166,00000000"
+  },
+  "2026-06-17": {
+    "date_iso": "2026-06-17",
+    "time_berlin": "01:39",
+    "symbol": "BTC",
+    "price_eur": "56567,00000000",
+    "price_usd": "65699,00000000"
   }
 };
 

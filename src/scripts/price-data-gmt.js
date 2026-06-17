@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-05-15T03:02:06.649Z
+// Auto-generiert am 2026-06-17T03:01:22.416Z
 const gmtPriceData = {
   "2024-01-02": {
     "date_iso": "2024-01-02",
@@ -6054,6 +6054,237 @@ const gmtPriceData = {
     "symbol": "GOMINING",
     "price_eur": "0,25241500",
     "price_usd": "0,29438700"
+  },
+  "2026-05-16": {
+    "date_iso": "2026-05-16",
+    "time_berlin": "01:26",
+    "symbol": "GOMINING",
+    "price_eur": "0,25810200",
+    "price_usd": "0,29997900"
+  },
+  "2026-05-17": {
+    "date_iso": "2026-05-17",
+    "time_berlin": "01:25",
+    "symbol": "GOMINING",
+    "price_eur": "0,25980000",
+    "price_usd": "0,30207000"
+  },
+  "2026-05-18": {
+    "date_iso": "2026-05-18",
+    "time_berlin": "01:26",
+    "symbol": "GOMINING",
+    "price_eur": "0,25845400",
+    "price_usd": "0,30035400"
+  },
+  "2026-05-19": {
+    "date_iso": "2026-05-19",
+    "time_berlin": "01:31",
+    "symbol": "GOMINING",
+    "price_eur": "0,25490700",
+    "price_usd": "0,29718100"
+  },
+  "2026-05-20": {
+    "date_iso": "2026-05-20",
+    "time_berlin": "01:32",
+    "symbol": "GOMINING",
+    "price_eur": "0,25318400",
+    "price_usd": "0,29395900"
+  },
+  "2026-05-21": {
+    "date_iso": "2026-05-21",
+    "time_berlin": "01:37",
+    "symbol": "GOMINING",
+    "price_eur": "0,25462300",
+    "price_usd": "0,29598400"
+  },
+  "2026-05-22": {
+    "date_iso": "2026-05-22",
+    "time_berlin": "01:30",
+    "symbol": "GOMINING",
+    "price_eur": "0,25369500",
+    "price_usd": "0,29470000"
+  },
+  "2026-05-23": {
+    "date_iso": "2026-05-23",
+    "time_berlin": "01:32",
+    "symbol": "GOMINING",
+    "price_eur": "0,25275800",
+    "price_usd": "0,29341400"
+  },
+  "2026-05-24": {
+    "date_iso": "2026-05-24",
+    "time_berlin": "01:27",
+    "symbol": "GOMINING",
+    "price_eur": "0,25205200",
+    "price_usd": "0,29248100"
+  },
+  "2026-05-25": {
+    "date_iso": "2026-05-25",
+    "time_berlin": "01:29",
+    "symbol": "GOMINING",
+    "price_eur": "0,24769700",
+    "price_usd": "0,28845200"
+  },
+  "2026-05-26": {
+    "date_iso": "2026-05-26",
+    "time_berlin": "01:32",
+    "symbol": "GOMINING",
+    "price_eur": "0,24649400",
+    "price_usd": "0,28693800"
+  },
+  "2026-05-27": {
+    "date_iso": "2026-05-27",
+    "time_berlin": "01:32",
+    "symbol": "GOMINING",
+    "price_eur": "0,25559600",
+    "price_usd": "0,29743100"
+  },
+  "2026-05-28": {
+    "date_iso": "2026-05-28",
+    "time_berlin": "01:36",
+    "symbol": "GOMINING",
+    "price_eur": "0,25012800",
+    "price_usd": "0,29070800"
+  },
+  "2026-05-29": {
+    "date_iso": "2026-05-29",
+    "time_berlin": "01:37",
+    "symbol": "GOMINING",
+    "price_eur": "0,24525800",
+    "price_usd": "0,28575900"
+  },
+  "2026-05-30": {
+    "date_iso": "2026-05-30",
+    "time_berlin": "01:37",
+    "symbol": "GOMINING",
+    "price_eur": "0,23843300",
+    "price_usd": "0,27807300"
+  },
+  "2026-05-31": {
+    "date_iso": "2026-05-31",
+    "time_berlin": "01:29",
+    "symbol": "GOMINING",
+    "price_eur": "0,24996600",
+    "price_usd": "0,29154400"
+  },
+  "2026-06-01": {
+    "date_iso": "2026-06-01",
+    "time_berlin": "01:30",
+    "symbol": "GOMINING",
+    "price_eur": "0,24280900",
+    "price_usd": "0,28300800"
+  },
+  "2026-06-02": {
+    "date_iso": "2026-06-02",
+    "time_berlin": "01:39",
+    "symbol": "GOMINING",
+    "price_eur": "0,24534000",
+    "price_usd": "0,28544500"
+  },
+  "2026-06-03": {
+    "date_iso": "2026-06-03",
+    "time_berlin": "01:41",
+    "symbol": "GOMINING",
+    "price_eur": "0,23577900",
+    "price_usd": "0,27398500"
+  },
+  "2026-06-04": {
+    "date_iso": "2026-06-04",
+    "time_berlin": "01:40",
+    "symbol": "GOMINING",
+    "price_eur": "0,23144500",
+    "price_usd": "0,26864200"
+  },
+  "2026-06-05": {
+    "date_iso": "2026-06-05",
+    "time_berlin": "01:34",
+    "symbol": "GOMINING",
+    "price_eur": "0,22875300",
+    "price_usd": "0,26566700"
+  },
+  "2026-06-06": {
+    "date_iso": "2026-06-06",
+    "time_berlin": "01:35",
+    "symbol": "GOMINING",
+    "price_eur": "0,22782700",
+    "price_usd": "0,26252500"
+  },
+  "2026-06-07": {
+    "date_iso": "2026-06-07",
+    "time_berlin": "01:30",
+    "symbol": "GOMINING",
+    "price_eur": "0,22195200",
+    "price_usd": "0,25578900"
+  },
+  "2026-06-08": {
+    "date_iso": "2026-06-08",
+    "time_berlin": "01:31",
+    "symbol": "GOMINING",
+    "price_eur": "0,22705100",
+    "price_usd": "0,26152600"
+  },
+  "2026-06-09": {
+    "date_iso": "2026-06-09",
+    "time_berlin": "01:34",
+    "symbol": "GOMINING",
+    "price_eur": "0,23438500",
+    "price_usd": "0,27026900"
+  },
+  "2026-06-10": {
+    "date_iso": "2026-06-10",
+    "time_berlin": "01:37",
+    "symbol": "GOMINING",
+    "price_eur": "0,22228900",
+    "price_usd": "0,25642900"
+  },
+  "2026-06-11": {
+    "date_iso": "2026-06-11",
+    "time_berlin": "01:39",
+    "symbol": "GOMINING",
+    "price_eur": "0,20830300",
+    "price_usd": "0,24023200"
+  },
+  "2026-06-12": {
+    "date_iso": "2026-06-12",
+    "time_berlin": "01:39",
+    "symbol": "GOMINING",
+    "price_eur": "0,22299100",
+    "price_usd": "0,25813300"
+  },
+  "2026-06-13": {
+    "date_iso": "2026-06-13",
+    "time_berlin": "01:38",
+    "symbol": "GOMINING",
+    "price_eur": "0,23669600",
+    "price_usd": "0,27394000"
+  },
+  "2026-06-14": {
+    "date_iso": "2026-06-14",
+    "time_berlin": "01:32",
+    "symbol": "GOMINING",
+    "price_eur": "0,24219400",
+    "price_usd": "0,28020600"
+  },
+  "2026-06-15": {
+    "date_iso": "2026-06-15",
+    "time_berlin": "01:35",
+    "symbol": "GOMINING",
+    "price_eur": "0,23618500",
+    "price_usd": "0,27407700"
+  },
+  "2026-06-16": {
+    "date_iso": "2026-06-16",
+    "time_berlin": "01:41",
+    "symbol": "GOMINING",
+    "price_eur": "0,25078100",
+    "price_usd": "0,29069400"
+  },
+  "2026-06-17": {
+    "date_iso": "2026-06-17",
+    "time_berlin": "01:39",
+    "symbol": "GOMINING",
+    "price_eur": "0,24167800",
+    "price_usd": "0,28069600"
   }
 };
 
