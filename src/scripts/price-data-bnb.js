@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-06-18T19:27:30.409964Z
+// Auto-generiert am 2026-06-18T20:01:50.048327Z
 // Quelle: data/price_lists/bnb_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
