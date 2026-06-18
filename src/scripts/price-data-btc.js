@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-06-18T19:22:07.779041Z
+// Auto-generiert am 2026-06-18T19:27:30.296477Z
 // Quelle: data/price_lists/bitcoin_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 

@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-06-18T19:22:07.837880Z
+// Auto-generiert am 2026-06-18T19:27:30.335309Z
 // Quelle: data/price_lists/gomining_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
