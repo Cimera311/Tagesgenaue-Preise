@@ -1,0 +1,39 @@
+name: Fetch Price Lists (all currencies)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 01:05 UTC – nach 00:35 UTC, wenn CoinGecko Vortags-Daten bestätigt hat
+    - cron: "5 1 * * *"
+
+jobs:
+  fetch-price-lists:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+
+      - name: Run fill_price_lists
+        run: |
+          python fill_price_lists_target.py
+
+      - name: Commit & push updated price lists
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/price_lists/*.csv
+          git commit -m "chore: update price lists ($(date -u +'%Y-%m-%dT%H:%M:%SZ'))" || echo "No changes"
+          git push
