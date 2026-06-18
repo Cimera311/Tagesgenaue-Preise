@@ -1,16 +1,27 @@
+
 name: Convert Price Lists CSV to JS
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Täglich um 03:00 UTC (nach fetch-price-lists um 01:05)
+    # Täglich um 03:00 UTC
+    # Läuft nach dem Workflow, der die CSV-Preislisten aktualisiert.
+    - cron: '0 3 * * *'
+
   workflow_dispatch:
+
   push:
     paths:
       - 'data/price_lists/*.csv'
+      - 'convert-price-lists-to-js.py'
+
+concurrency:
+  group: convert-price-lists-to-js
+  cancel-in-progress: false
 
 jobs:
   convert:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
@@ -18,20 +29,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '18'
+          python-version: '3.12'
 
       - name: Run Conversion Script
-        run: node convert-price-lists-to-js.js
+        run: python convert-price-lists-to-js.py
 
       - name: Commit Generated Files
         run: |
           git config user.name "CSV-to-JS Bot"
           git config user.email "bot@github.com"
+
           git add src/scripts/price-data-*.js
-          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-convert: Price Lists CSV zu JS ($(date +'%Y-%m-%d %H:%M'))"
+
+          if git diff --staged --quiet; then
+            echo "Keine Änderungen an den JS-Preisdateien."
+            exit 0
+          fi
+
+          git commit -m "🤖 Auto-convert: Price Lists CSV zu JS ($(date -u +'%Y-%m-%d %H:%M UTC'))"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
