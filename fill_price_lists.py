@@ -27,6 +27,9 @@ COINS = [
     ("usd-coin",          "USDC", "usdc_prices.csv"),
 ]
 
+BATCH_REQUEST_SIZE = 4
+BATCH_PAUSE_SECONDS = 60
+
 CURRENCIES = [
     "eur","usd","gbp",
     "aed","ars","aud","bdt","bhd","bmd","brl","cad","chf","clp","cny","czk","dkk",
@@ -71,8 +74,9 @@ def fetch_history(coin_id, date_str):
 def process_date(date_iso):
     d = datetime.strptime(date_iso, "%Y-%m-%d")
     time_berlin = "00:00"
+    requests_since_batch_pause = 0
 
-    for coin_id, symbol, filename in COINS:
+    for idx, (coin_id, symbol, filename) in enumerate(COINS):
         filepath = os.path.join(DATA_DIR, filename)
 
         # Header schreiben falls Datei leer/neu
@@ -101,7 +105,19 @@ def process_date(date_iso):
                     print(f"Fehler: {e}")
                     break
 
+        requests_since_batch_pause += 1
+
         if data is None:
+            if (
+                requests_since_batch_pause >= BATCH_REQUEST_SIZE
+                and idx < len(COINS) - 1
+            ):
+                print(
+                    f"Batch-Limit erreicht ({BATCH_REQUEST_SIZE} API-Calls), "
+                    f"warte {BATCH_PAUSE_SECONDS}s …"
+                )
+                time.sleep(BATCH_PAUSE_SECONDS)
+                requests_since_batch_pause = 0
             print("FEHLER – übersprungen.")
             continue
 
@@ -115,6 +131,17 @@ def process_date(date_iso):
         print("OK")
 
         time.sleep(2)  # Rate-limit-Pause zwischen Coins
+
+        if (
+            requests_since_batch_pause >= BATCH_REQUEST_SIZE
+            and idx < len(COINS) - 1
+        ):
+            print(
+                f"Batch-Limit erreicht ({BATCH_REQUEST_SIZE} API-Calls), "
+                f"warte {BATCH_PAUSE_SECONDS}s …"
+            )
+            time.sleep(BATCH_PAUSE_SECONDS)
+            requests_since_batch_pause = 0
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ import ssl
 import sys
 import time
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 _ssl_ctx = ssl.create_default_context()
@@ -16,11 +16,12 @@ _ssl_ctx.check_hostname = False
 _ssl_ctx.verify_mode = ssl.CERT_NONE
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data", "price_lists")
-TARGET_DATE = "2026-06-12"  # für Tests: festes Datum statt gestern
+TARGET_START_DATE = "2024-01-01"  # für Tests: Startdatum
+TARGET_END_DATE = "2024-02-01"    # für Tests: Enddatum (inklusive)
 COINS = [
     ("bitcoin",           "BTC",  "bitcoin_prices.csv"),
     ("gmt-token",         "GMT",  "gomining_prices.csv"),
-    ("ethereum",          "ETH",  "ethereum_prices.csv"),
+   ("ethereum",          "ETH",  "ethereum_prices.csv"),
     ("binancecoin",       "BNB",  "bnb_prices.csv"),
     ("solana",            "SOL",  "solana_prices.csv"),
     ("the-open-network",  "TON",  "toncoin_prices.csv"),
@@ -59,8 +60,7 @@ def date_in_file(filepath, date_iso):
 def fetch_history(coin_id, date_str):
     """date_str = YYYY-MM-DD → wandelt in DD-MM-YYYY um."""
     d = datetime.strptime(date_str, "%Y-%m-%d")
-    """"cg_date = d.strftime("%d-%m-%Y")"""
-    cg_date = TARGET_DATE
+    cg_date = d.strftime("%d-%m-%Y")
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/history?date={cg_date}"
     req = urllib.request.Request(url, headers={
         "Accept": "application/json",
@@ -71,7 +71,6 @@ def fetch_history(coin_id, date_str):
 
 
 def process_date(date_iso):
-    d = datetime.strptime(date_iso, "%Y-%m-%d")
     time_berlin = "00:00"
 
     for coin_id, symbol, filename in COINS:
@@ -119,20 +118,53 @@ def process_date(date_iso):
         time.sleep(2)  # Rate-limit-Pause zwischen Coins
 
 
+def build_date_list(start_iso, end_iso):
+    start_date = datetime.strptime(start_iso, "%Y-%m-%d").date()
+    end_date = datetime.strptime(end_iso, "%Y-%m-%d").date()
+    if start_date > end_date:
+        raise ValueError("Startdatum darf nicht nach dem Enddatum liegen.")
+
+    dates = []
+    current = start_date
+    while current <= end_date:
+        dates.append(current.strftime("%Y-%m-%d"))
+        current += timedelta(days=1)
+    return dates
+
+
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        # Kein Argument → gestern (History-Endpoint liefert confirmed previous-day)
-        from datetime import timedelta
-        """date_iso = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")"""
-        date_iso = TARGET_DATE
-        print(f"Kein Datum angegeben → verwende gestern: {date_iso}")
+    if len(sys.argv) == 1:
+        # Kein Argument → verwende TARGET_START_DATE bis TARGET_END_DATE.
+        start_iso = TARGET_START_DATE
+        end_iso = TARGET_END_DATE
+        print(
+            f"Kein Datum angegeben → verwende TARGET-Bereich: "
+            f"{start_iso} bis {end_iso}"
+        )
+    elif len(sys.argv) == 2:
+        start_iso = sys.argv[1]
+        end_iso = sys.argv[1]
+    elif len(sys.argv) == 3:
+        start_iso = sys.argv[1]
+        end_iso = sys.argv[2]
     else:
-        date_iso = sys.argv[1]
-        try:
-            datetime.strptime(date_iso, "%Y-%m-%d")
-        except ValueError:
-            print("Ungültiges Datum. Format: YYYY-MM-DD")
-            sys.exit(1)
-    print(f"Lade Preise für {date_iso} …")
-    process_date(date_iso)
+        print("Verwendung: python fill_price_lists_target_Bitcoin.py [YYYY-MM-DD] [YYYY-MM-DD]")
+        print("  Ohne Argumente: TARGET_START_DATE bis TARGET_END_DATE")
+        print("  Ein Argument: nur dieses Datum")
+        print("  Zwei Argumente: von bis (inklusive)")
+        sys.exit(1)
+
+    try:
+        dates_to_process = build_date_list(start_iso, end_iso)
+    except ValueError:
+        print("Ungültiges Datum. Format: YYYY-MM-DD")
+        sys.exit(1)
+
+    print(
+        f"Lade Preise für {len(dates_to_process)} Tag(e): "
+        f"{dates_to_process[0]} bis {dates_to_process[-1]} …"
+    )
+    for date_iso in dates_to_process:
+        print(f"\n=== {date_iso} ===")
+        process_date(date_iso)
     print("Fertig.")
