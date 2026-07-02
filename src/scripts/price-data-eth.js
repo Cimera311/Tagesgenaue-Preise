@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-07-02T04:27:13.462391Z
+// Auto-generiert am 2026-07-02T18:30:40.188966Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
