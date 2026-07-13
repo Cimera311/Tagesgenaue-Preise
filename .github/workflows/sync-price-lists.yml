@@ -24,19 +24,19 @@ jobs:
 
       - name: Copy Price List CSV Files
         run: |
-          mkdir -p target-repo/data/price_lists
-          cp data/price_lists/*.csv target-repo/data/price_lists/
+          mkdir -p target-repo/docs/data/price_lists
+          cp data/price_lists/*.csv target-repo/docs/data/price_lists/
 
       - name: Copy Price List JS Files
         run: |
-          mkdir -p target-repo/src/scripts
-          cp src/scripts/price-data-*.js target-repo/HashFarm/src/scripts/ || true
+          mkdir -p target-repo/docs/src/scripts
+          cp src/scripts/price-data-*.js target-repo/docs/src/scripts/ || true
 
       - name: Commit and Push to Target
         run: |
           cd target-repo
           git config user.name "Price Sync Bot"
           git config user.email "bot@github.com"
-          git add data/price_lists/*.csv HashFarm/src/scripts/price-data-*.js
+          git add docs/data/price_lists/*.csv docs/src/scripts/price-data-*.js
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Price Lists (CSV + JS) vom $(date +'%Y-%m-%d %H:%M')"
           git push

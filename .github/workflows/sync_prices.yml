@@ -24,21 +24,21 @@ jobs:
           
       - name: Copy CSV Files
         run: |
-          mkdir -p target-repo/data
-          cp data/bitcoin_eur.csv target-repo/data/
-          cp data/gominingtoken_eur.csv target-repo/data/
+          mkdir -p target-repo/docs/data
+          cp data/bitcoin_eur.csv target-repo/docs/data/
+          cp data/gominingtoken_eur.csv target-repo/docs/data/
           
       - name: Copy JS Price Data Files
         run: |
-          mkdir -p target-repo/src/scripts
-          cp src/scripts/price-data-btc.js target-repo/HashFarm/src/scripts/
-          cp src/scripts/price-data-gmt.js target-repo/HashFarm/src/scripts/
+          mkdir -p target-repo/docs/src/scripts
+          cp src/scripts/price-data-btc.js target-repo/docs/src/scripts/
+          cp src/scripts/price-data-gmt.js target-repo/docs/src/scripts/
           
       - name: Commit and Push to Target
         run: |
           cd target-repo
           git config user.name "Price Sync Bot"
           git config user.email "bot@github.com"
-          git add data/*.csv HashFarm/src/scripts/price-data-*.js
+          git add docs/data/*.csv docs/src/scripts/price-data-*.js
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-sync: Preise (CSV + JS) vom $(date +'%Y-%m-%d %H:%M')"
           git push
