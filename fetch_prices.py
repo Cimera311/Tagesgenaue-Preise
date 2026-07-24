@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Daily crypto price appender (EUR + USD) aligned to Europe/Berlin local date/time,
+Daily crypto price appender (EUR + USD + GBP) aligned to Europe/Berlin local date/time,
 with duplicate-date guard (idempotent).
 
-Primary: CoinGecko /simple/price (no key), asks for eur & usd
-Fallback: Coinpaprika /tickers/{id}?quotes=USD,EUR
-Extra fallback: if Paprika returns only USD, convert USD->EUR via exchangerate.host
+Primary: CoinGecko /simple/price (no key), asks for eur, usd & gbp
+Fallback: Coinpaprika /tickers/{id}?quotes=USD,EUR,GBP
+Extra fallback: if Paprika returns only USD, convert USD->EUR/GBP via exchangerate.host
 
 Coins: BTC, GoMining Token (edit COINS to add more)
 """
@@ -36,14 +36,14 @@ def coingecko_simple_price(ids):
     """
     url = (
         "https://api.coingecko.com/api/v3/simple/price"
-        f"?ids={','.join(ids)}&vs_currencies=eur,usd"
+        f"?ids={','.join(ids)}&vs_currencies=eur,usd,gbp"
     )
     try:
         txt = http_get(url, headers={"accept": "application/json", "user-agent": "price-automation/1.1"})
         data = json.loads(txt)
         # normalize floats
         for k, v in data.items():
-            for cur in ("eur", "usd"):
+            for cur in ("eur", "usd", "gbp"):
                 if cur in v and v[cur] is not None:
                     try:
                         v[cur] = float(v[cur])
@@ -62,13 +62,22 @@ def fetch_fx_usd_eur():
     except Exception:
         return None
 
+def fetch_fx_usd_gbp():
+    """USD->GBP FX rate via exchangerate.host (free)."""
+    url = "https://api.exchangerate.host/latest?base=USD&symbols=GBP"
+    try:
+        data = json.loads(http_get(url, headers={"accept":"application/json"}))
+        return float(data.get("rates", {}).get("GBP"))
+    except Exception:
+        return None
+
 def paprika_ticker_quotes(coin_id):
     """
-    Returns (eur_price, usd_price) from CoinPaprika.
-    Tries ?quotes=USD,EUR; if EUR is missing but USD present, convert USD->EUR.
+    Returns (eur_price, usd_price, gbp_price) from CoinPaprika.
+    Tries ?quotes=USD,EUR,GBP; if EUR/GBP is missing but USD present, convert via FX.
     """
-    url = f"https://api.coinpaprika.com/v1/tickers/{coin_id}?quotes=USD,EUR"
-    eur = usd = None
+    url = f"https://api.coinpaprika.com/v1/tickers/{coin_id}?quotes=USD,EUR,GBP"
+    eur = usd = gbp = None
     try:
         data = json.loads(http_get(url, headers={"accept":"application/json"}))
         q = data.get("quotes", {})
@@ -76,6 +85,8 @@ def paprika_ticker_quotes(coin_id):
             eur = float(q["EUR"]["price"])
         if "USD" in q and q["USD"].get("price") is not None:
             usd = float(q["USD"]["price"])
+        if "GBP" in q and q["GBP"].get("price") is not None:
+            gbp = float(q["GBP"]["price"])
     except Exception:
         pass
 
@@ -84,20 +95,26 @@ def paprika_ticker_quotes(coin_id):
         if fx is not None:
             eur = usd * fx
 
-    return eur, usd
+    if gbp is None and usd is not None:
+        fx = fetch_fx_usd_gbp()
+        if fx is not None:
+            gbp = usd * fx
+
+    return eur, usd, gbp
 
 # ---------- CSV helpers ----------
 
-# ---------- CSV helpers ----------
-
-def append_csv_idempotent(path, row_date_iso, row_time_berlin, symbol, price_eur, price_usd):
+def append_csv_idempotent(path, row_date_iso, row_time_berlin, symbol, price_eur, price_usd, price_gbp=None):
     # Duplikate nach Datum verhindern (liest mit Semikolon)
     exists = os.path.exists(path)
+    has_gbp_header = False
     if exists:
         try:
             with open(path, "r", encoding="utf-8") as f:
                 rd = csv.reader(f, delimiter=";")
                 header = next(rd, None)
+                if header and "price_gbp" in header:
+                    has_gbp_header = True
                 for row in rd:
                     if not row:
                         continue
@@ -112,20 +129,21 @@ def append_csv_idempotent(path, row_date_iso, row_time_berlin, symbol, price_eur
     clean_date = str(row_date_iso).strip()
     clean_time = str(row_time_berlin).strip()
     clean_symbol = str(symbol).strip()
-        # ...existing code...
-    #eur_str = f"{price_eur:.8f}".replace(".", ",").strip() if price_eur is not None else ""
-    #usd_str = f"{price_usd:.8f}".replace(".", ",").strip() if price_usd is not None else ""
-    # ...existing code...
     eur_str = f"{price_eur:.8f}".replace(".", ",").strip() if price_eur is not None else ""
     usd_str = f"{price_usd:.8f}".replace(".", ",").strip() if price_usd is not None else ""
+    gbp_str = f"{price_gbp:.8f}".replace(".", ",").strip() if price_gbp is not None else ""
 
     with open(path, "a", newline="", encoding="utf-8") as f:
         w = csv.writer(f, delimiter=";")
         if not exists:
-            w.writerow(["date_iso", "time_berlin", "symbol", "price_eur", "price_usd"])
-        w.writerow([clean_date, clean_time, clean_symbol, eur_str, usd_str])
+            w.writerow(["date_iso", "time_berlin", "symbol", "price_eur", "price_usd", "price_gbp"])
+            has_gbp_header = True
+        if has_gbp_header:
+            w.writerow([clean_date, clean_time, clean_symbol, eur_str, usd_str, gbp_str])
+        else:
+            w.writerow([clean_date, clean_time, clean_symbol, eur_str, usd_str])
 
-    print(f"Appended {clean_symbol} EUR={eur_str or '∅'} USD={usd_str or '∅'} to {path}")
+    print(f"Appended {clean_symbol} EUR={eur_str or '∅'} USD={usd_str or '∅'} GBP={gbp_str or '∅'} to {path}")
 
 
 
@@ -140,27 +158,30 @@ def main():
     cg = coingecko_simple_price(ids)  # kann None sein
 
     for c in COINS:
-        eur = usd = None
+        eur = usd = gbp = None
 
-        # Primär: CoinGecko (EUR & USD in einem Call)
+        # Primär: CoinGecko (EUR, USD & GBP in einem Call)
         if cg and c["id"] in cg:
             eur = cg[c["id"]].get("eur")
             usd = cg[c["id"]].get("usd")
+            gbp = cg[c["id"]].get("gbp")
 
-        # Fallback: CoinPaprika (liefert USD/EUR; wenn nur USD -> FX-Konvertierung)
-        if eur is None or usd is None:
-            eur_f, usd_f = paprika_ticker_quotes(c["paprika_id"])
+        # Fallback: CoinPaprika (liefert USD/EUR/GBP; wenn nur USD -> FX-Konvertierung)
+        if eur is None or usd is None or gbp is None:
+            eur_f, usd_f, gbp_f = paprika_ticker_quotes(c["paprika_id"])
             if eur is None:
                 eur = eur_f
             if usd is None:
                 usd = usd_f
+            if gbp is None:
+                gbp = gbp_f
 
-        if eur is None and usd is None:
-            print(f"ERROR: Failed to fetch EUR/USD for {c['id']}", file=sys.stderr)
+        if eur is None and usd is None and gbp is None:
+            print(f"ERROR: Failed to fetch EUR/USD/GBP for {c['id']}", file=sys.stderr)
             continue
 
         out = os.path.join(DATA_DIR, c.get("filename", f"{c['id'].replace('-', '')}_eur.csv"))
-        append_csv_idempotent(out, date_berlin, time_berlin, c["symbol"], eur, usd)
+        append_csv_idempotent(out, date_berlin, time_berlin, c["symbol"], eur, usd, gbp)
 
 
 if __name__ == "__main__":
