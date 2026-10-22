@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-10-21T03:14:59.714788Z
+// Auto-generiert am 2026-10-22T03:14:26.391183Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
@@ -25430,6 +25430,58 @@ const ethPriceData = {
     "price_xag": 42.28849046,
     "price_xau": 0.58220819,
     "price_zar": 39515.16429158
+  },
+  "2026-10-21": {
+    "date_iso": "2026-10-21",
+    "time_berlin": "00:00",
+    "symbol": "ETH",
+    "price_eur": 2179.27511237,
+    "price_usd": 2446.4878554,
+    "price_gbp": 1829.50563666,
+    "price_aed": 8984.72664895,
+    "price_ars": 3730234.89565244,
+    "price_aud": 3491.96263606,
+    "price_bdt": 302507.76093366,
+    "price_bhd": 923.1283695,
+    "price_bmd": 2446.4878554,
+    "price_brl": 12291.64428309,
+    "price_cad": 3441.52339594,
+    "price_chf": 2020.15064928,
+    "price_clp": 2386084.07024741,
+    "price_cny": 16338.3798447,
+    "price_czk": 52954.22718358,
+    "price_dkk": 16289.05864953,
+    "price_gel": 6336.40354548,
+    "price_hkd": 19201.13760869,
+    "price_huf": 793555.0332159,
+    "price_idr": 44061135.08282996,
+    "price_ils": 7558.06948851,
+    "price_inr": 231723.37857769,
+    "price_jpy": 387257.74306503,
+    "price_krw": 3239846.06377213,
+    "price_kwd": 757.72621857,
+    "price_lkr": 811095.54379811,
+    "price_mmk": 5137502.17194128,
+    "price_mxn": 45083.02192851,
+    "price_myr": 9987.0527233,
+    "price_ngn": 3255883.89747677,
+    "price_nok": 23009.95222637,
+    "price_nzd": 4309.51037567,
+    "price_php": 154383.78614192,
+    "price_pkr": 676988.32239635,
+    "price_pln": 9517.95580244,
+    "price_rub": 202560.21581646,
+    "price_sar": 9188.00287836,
+    "price_sek": 24245.79556652,
+    "price_sgd": 3126.64817652,
+    "price_thb": 82244.06174651,
+    "price_try": 121326.7199154,
+    "price_twd": 79737.40007582,
+    "price_uah": 110225.1843285,
+    "price_vnd": 63306712.2871444,
+    "price_xag": 42.33666806,
+    "price_xau": 0.5946678,
+    "price_zar": 40113.72558258
   }
 };
 
