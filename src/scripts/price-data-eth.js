@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-10-24T03:13:38.665018Z
+// Auto-generiert am 2026-10-25T03:14:43.062574Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
@@ -25586,6 +25586,58 @@ const ethPriceData = {
     "price_xag": 43.739528,
     "price_xau": 0.59311257,
     "price_zar": 39353.3731132
+  },
+  "2026-10-24": {
+    "date_iso": "2026-10-24",
+    "time_berlin": "00:00",
+    "symbol": "ETH",
+    "price_eur": 2128.90910001,
+    "price_usd": 2384.74983142,
+    "price_gbp": 1783.05837095,
+    "price_aed": 8757.99375589,
+    "price_ars": 3646878.67970049,
+    "price_aud": 3392.24701645,
+    "price_bdt": 294722.56071493,
+    "price_bhd": 899.32254793,
+    "price_bmd": 2384.74983142,
+    "price_brl": 11874.14636061,
+    "price_cad": 3339.24595145,
+    "price_chf": 1967.38283967,
+    "price_clp": 2374042.30467787,
+    "price_cny": 15915.8203749,
+    "price_czk": 51795.57396355,
+    "price_dkk": 15910.2162128,
+    "price_gel": 6176.50206338,
+    "price_hkd": 18702.04284044,
+    "price_huf": 780695.55231228,
+    "price_idr": 43149305.73725598,
+    "price_ils": 7405.88829647,
+    "price_inr": 226423.7691065,
+    "price_jpy": 374083.6864866,
+    "price_krw": 3156276.02063142,
+    "price_kwd": 740.91792512,
+    "price_lkr": 791298.13575428,
+    "price_mmk": 5007855.40849243,
+    "price_mxn": 44519.4637529,
+    "price_myr": 9742.4184863,
+    "price_ngn": 3176629.86044259,
+    "price_nok": 22235.31442293,
+    "price_nzd": 4185.24310839,
+    "price_php": 151713.00285159,
+    "price_pkr": 659449.0497085,
+    "price_pln": 9372.33154472,
+    "price_rub": 191571.17735,
+    "price_sar": 8946.52730807,
+    "price_sek": 23684.85837571,
+    "price_sgd": 3045.08705974,
+    "price_thb": 80213.24739544,
+    "price_try": 118531.11674723,
+    "price_twd": 77708.98105672,
+    "price_uah": 107409.8168304,
+    "price_vnd": 61629406.15654954,
+    "price_xag": 44.24524137,
+    "price_xau": 0.59680749,
+    "price_zar": 39524.19982352
   }
 };
 
