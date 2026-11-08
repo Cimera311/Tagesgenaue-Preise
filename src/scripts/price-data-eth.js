@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-11-07T03:08:48.621766Z
+// Auto-generiert am 2026-11-08T03:09:51.250764Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
@@ -26314,6 +26314,58 @@ const ethPriceData = {
     "price_xag": 43.23127254,
     "price_xau": 0.54718347,
     "price_zar": 36859.8963016
+  },
+  "2026-11-07": {
+    "date_iso": "2026-11-07",
+    "time_berlin": "00:00",
+    "symbol": "ETH",
+    "price_eur": 2006.27997659,
+    "price_usd": 2236.28153217,
+    "price_gbp": 1674.1138992,
+    "price_aed": 8213.86206766,
+    "price_ars": 3452923.23183003,
+    "price_aud": 3254.19439626,
+    "price_bdt": 278500.73240993,
+    "price_bhd": 843.86083616,
+    "price_bmd": 2236.28153217,
+    "price_brl": 12308.38173898,
+    "price_cad": 3156.17594043,
+    "price_chf": 1835.0926253,
+    "price_clp": 2186255.91429404,
+    "price_cny": 14927.40285538,
+    "price_czk": 48827.97730006,
+    "price_dkk": 15002.09465855,
+    "price_gel": 5803.15057598,
+    "price_hkd": 17537.2552175,
+    "price_huf": 729027.77948698,
+    "price_idr": 40495704.12527608,
+    "price_ils": 7124.58051474,
+    "price_inr": 210316.15963419,
+    "price_jpy": 354372.45503663,
+    "price_krw": 3049840.75357161,
+    "price_kwd": 695.11904261,
+    "price_lkr": 743569.33209052,
+    "price_mmk": 4696079.40347757,
+    "price_mxn": 41651.50387236,
+    "price_myr": 9082.6574429,
+    "price_ngn": 3012740.84295293,
+    "price_nok": 21154.99966616,
+    "price_nzd": 4032.24370322,
+    "price_php": 141131.72078632,
+    "price_pkr": 618410.75531106,
+    "price_pln": 8823.79220158,
+    "price_rub": 183208.64367595,
+    "price_sar": 8396.55508743,
+    "price_sek": 22126.88762004,
+    "price_sgd": 2868.25469316,
+    "price_thb": 74957.19612154,
+    "price_try": 112130.07437034,
+    "price_twd": 73294.79810129,
+    "price_uah": 101296.84456264,
+    "price_vnd": 57434790.31882152,
+    "price_xag": 43.0472119,
+    "price_xau": 0.54999108,
+    "price_zar": 36939.94940068
   }
 };
 
