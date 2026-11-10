@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-11-09T03:10:30.837326Z
+// Auto-generiert am 2026-11-10T03:09:22.587411Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
@@ -26418,6 +26418,58 @@ const ethPriceData = {
     "price_xag": 43.06209972,
     "price_xau": 0.55018129,
     "price_zar": 36954.87260031
+  },
+  "2026-11-09": {
+    "date_iso": "2026-11-09",
+    "time_berlin": "00:00",
+    "symbol": "ETH",
+    "price_eur": 1905.73507886,
+    "price_usd": 2124.38294468,
+    "price_gbp": 1590.09426094,
+    "price_aed": 7802.00880263,
+    "price_ars": 3281130.31312585,
+    "price_aud": 3092.94011435,
+    "price_bdt": 265126.37563811,
+    "price_bhd": 803.67106304,
+    "price_bmd": 2124.38294468,
+    "price_brl": 11693.37700291,
+    "price_cad": 2999.46726478,
+    "price_chf": 1741.21011733,
+    "price_clp": 2082383.91723203,
+    "price_cny": 14183.44273016,
+    "price_czk": 46359.02602846,
+    "price_dkk": 14246.22886809,
+    "price_gel": 5512.77374144,
+    "price_hkd": 16654.0151195,
+    "price_huf": 691929.58233735,
+    "price_idr": 38459422.44452958,
+    "price_ils": 6768.12473303,
+    "price_inr": 199593.74196436,
+    "price_jpy": 336280.61449052,
+    "price_krw": 2897439.82888718,
+    "price_kwd": 660.34319452,
+    "price_lkr": 707873.69028385,
+    "price_mmk": 4461097.96468107,
+    "price_mxn": 39602.1520275,
+    "price_myr": 8627.11913835,
+    "price_ngn": 2864956.69442121,
+    "price_nok": 20098.96123902,
+    "price_nzd": 3822.48295891,
+    "price_php": 134030.65526109,
+    "price_pkr": 588723.31572204,
+    "price_pln": 8376.71174751,
+    "price_rub": 174090.44398692,
+    "price_sar": 7987.44194111,
+    "price_sek": 21016.76477576,
+    "price_sgd": 2724.63796761,
+    "price_thb": 71227.26521718,
+    "price_try": 106562.98073799,
+    "price_twd": 69629.16203253,
+    "price_uah": 96433.12408976,
+    "price_vnd": 54345943.8396809,
+    "price_xag": 41.14445405,
+    "price_xau": 0.52378786,
+    "price_zar": 35148.05602901
   }
 };
 
