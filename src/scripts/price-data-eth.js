@@ -1,4 +1,4 @@
-// Auto-generiert am 2026-11-24T03:09:52.120776Z
+// Auto-generiert am 2026-11-25T03:09:39.562770Z
 // Quelle: data/price_lists/ethereum_prices.csv
 // Nicht manuell bearbeiten – stattdessen CSV neu konvertieren.
 
@@ -27198,6 +27198,58 @@ const ethPriceData = {
     "price_xag": 40.67284947,
     "price_xau": 0.48029662,
     "price_zar": 30132.57163861
+  },
+  "2026-11-24": {
+    "date_iso": "2026-11-24",
+    "time_berlin": "00:00",
+    "symbol": "ETH",
+    "price_eur": 1567.0687582,
+    "price_usd": 1709.31635604,
+    "price_gbp": 1311.36357792,
+    "price_aed": 6277.46431754,
+    "price_ars": 2700703.26216757,
+    "price_aud": 2578.42680384,
+    "price_bdt": 212622.86318665,
+    "price_bhd": 644.66866368,
+    "price_bmd": 1709.31635604,
+    "price_brl": 10135.90412802,
+    "price_cad": 2455.58165597,
+    "price_chf": 1438.46321421,
+    "price_clp": 1738084.15030767,
+    "price_cny": 11392.08071807,
+    "price_czk": 38272.2786475,
+    "price_dkk": 11712.73991988,
+    "price_gel": 4452.76910747,
+    "price_hkd": 13404.64688883,
+    "price_huf": 577938.09667183,
+    "price_idr": 31090755.19993128,
+    "price_ils": 5642.43619811,
+    "price_inr": 158821.9189252,
+    "price_jpy": 271805.08860131,
+    "price_krw": 2292876.73264706,
+    "price_kwd": 533.35456394,
+    "price_lkr": 568309.09201851,
+    "price_mmk": 3589478.88185693,
+    "price_mxn": 32780.41441787,
+    "price_myr": 7047.16947266,
+    "price_ngn": 2316568.08468079,
+    "price_nok": 16819.50201175,
+    "price_nzd": 3136.55278042,
+    "price_php": 108754.38652937,
+    "price_pkr": 472465.05398345,
+    "price_pln": 6964.38386291,
+    "price_rub": 140039.64825609,
+    "price_sar": 6400.33168653,
+    "price_sek": 17563.76399292,
+    "price_sgd": 2207.29149004,
+    "price_thb": 58086.84306898,
+    "price_try": 86501.15071863,
+    "price_twd": 56174.11977589,
+    "price_uah": 77240.44733259,
+    "price_vnd": 44071589.83439866,
+    "price_xag": 39.59357848,
+    "price_xau": 0.47067735,
+    "price_zar": 29767.61614163
   }
 };
 
